@@ -1,0 +1,59 @@
+### wandb ###
+wandb: false # Whether to use wandb or not
+project_name: 'topic-models' # Name of the project in wandb
+wandb_path: '/path/to/wandb' # Path to the wandb directory
+### data ###
+dataset_name: '20ng' # Name of the dataset
+# already registered datasets are: 20ng, ag_news, dbpedia
+# if you want to register your own dataset, please give the name as "self" and keep the following files in the dataset path mentioned below.
+# train.csv
+# val.csv
+# test.csv
+# Each of these files should contain following IDs:
+#     "text": The text document.
+#     "label": document labels (if they exist, in text form).
+#     Alert: Make sure all your splits contain all the labels available.
+
+data_path: '/path/to/data' # Path to the dataset (saved files of registered datasets in this location and loads "self" datasets from this location.)
+min_df: 30 # look countvectorizer in sklearn to know what is min df and max df.
+max_df: 0.85
+
+tpl: 1 # Number of topics per labels (if applicable). It is not applicable if you do not want to use labels.
+
+### model ###
+model_name: 'vae-lin-dir_pathwise-etm' # Name of the model
+# currently registered models are as follows:
+# general type in which model has to be defined: (model_type)-(labels-authors-ecrtm)-(encoder-sampler-decoder)
+# model_type right now available: 'vae' and 'scholar'
+# the second element only needs to be activated if you are including labels or authors with your training.
+# the third element is the actual topic model structure.
+# for VAEs it is-
+## supported encoder: 
+## 'context': for contextualized topic models. The input consists of concatenated contextualized embeddings and BoWs.
+## 'llm': for contextualized topic models. The input consists of contextualized embeddings from LLM of choice.
+## 'lin': The plain old simple linear layer. Input is just the BoWs.
+## supported samplers:
+## dir_pathwise: dirichlet pathwise sampling.
+## dir_rsvi: dirichlet rejection sampling.
+## supported decoder:
+## etm: The embedded decoder.
+## lin: plain old linear decoder.
+# for scholar:
+## encoder only has linear option and rest all are same.
+
+### model specific stuff ###
+sentence_transformer_name: "all-MiniLM-L6-v2" # name of sentence transformer (if used for contextualized embeddings)
+doc_emb_dim: 384 # Dimension of the document embeddings (if used) (used for contextualized embeddings).
+eps: 1e-8 # Epsilon for numerical stability in label topic models. only needed when using labels.
+beta: 2.0 # Beta for vae and scholar based topic models
+alpha: 0.01 # Alpha for dirichlet prior in vae and scholar based topic models.
+
+### training ###
+batch_size: 128 # Batch size
+lr: 0.001 # Learning rate
+epochs: 100 # Number of epochs
+exp_path: '/path/to/exp' # Path to the experiment. this is ideally our output directory where logs are stored.
+device: 'cuda:0' # Device to use
+saved_data: null # Path to the saved data. A flag to store saved data. It should be tuple with (train_dl, val_dl, test_dl, prepared_data). prepared_data is the output of return_prepared_data in data. And train_dl, val_dl, test_dl are output of return_dataloaders. Not to be confused with "self" dataset_name. This flag is can be used internally in training and has nothing to do with anything here.
+num_topics: null # Number of topics. Use null if you want to keep no of topics == no of labels. Otherwise please mention number of topics.
+random_state: 0
