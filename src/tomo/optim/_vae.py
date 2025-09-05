@@ -1,3 +1,5 @@
+"""\nOptimization helpers (training loops, loss functions).\n\nThis module is part of the `tomo` topic modeling library.\n"""
+
 import os
 import wandb
 import torch
@@ -7,6 +9,8 @@ from ._train import Trainer
 
 
 class TrainerVAE(Trainer):
+    """\n    Class `TrainerVAE`.\n\n    Args:\n    Trainer: Description.\n\n    Returns: Description.\n"""
+
     def __init__(
         self,
         model_name: str,
@@ -32,6 +36,7 @@ class TrainerVAE(Trainer):
         }
 
     def _train_one_epoch(self):
+        """\n        Function `_train_one_epoch`.\n    \n        Returns: Description.\n"""
         self.model.train()
         train_loss = 0
         epoch_kl_loss = 0
@@ -68,6 +73,7 @@ class TrainerVAE(Trainer):
         wandb.log({"train/nll": self.summary["train/nll"][-1]}, step=self.current_epoch)
 
     def _val_one_epoch(self):
+        """\n        Function `_val_one_epoch`.\n    \n        Returns: Description.\n"""
         self.model.eval()
         val_loss = 0.0
         epoch_kl_loss = 0
@@ -99,6 +105,7 @@ class TrainerVAE(Trainer):
         wandb.log({"val/nll": self.summary["val/nll"][-1]}, step=self.current_epoch)
 
     def run(self, **kwargs):
+        """\n        Function `run`.\n    \n        Returns: Description.\n"""
         for epoch in range(kwargs["epochs"]):
             self.current_epoch += 1
             self._run_epoch()

@@ -1,3 +1,5 @@
+"""Data loading and preprocessing utilities."""
+
 import os
 import ast
 import pickle
@@ -329,7 +331,9 @@ def return_self_data(path):
         test_labels = []
         for label in test["label"].to_list():
             test_labels.append(ast.literal_eval(label))
-        train_label_vocab = list(set([word for labels in train_labels for word in labels]))
+        train_label_vocab = list(
+            set([word for labels in train_labels for word in labels])
+        )
         val_label_vocab = train_label_vocab
         test_label_vocab = train_label_vocab
         train_label_vocab.sort()

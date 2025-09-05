@@ -1,3 +1,5 @@
+"""\nModel definitions and helpers for topic models.\n\nThis module is part of the `tomo` topic modeling library.\n"""
+
 import torch
 import torch.nn as nn
 from torch.distributions import Dirichlet
@@ -36,6 +38,7 @@ class DirRSVI(nn.Module):
         super().__init__()
 
     def calc_epsilon(self, p, alpha):
+        """\n        Function `calc_epsilon`.\n    \n        Args:\n        p: Description.\n        alpha: Description.\n    \n        Returns: Description.\n"""
         sqrt_alpha = torch.sqrt(9 * alpha - 3)
         powza = torch.pow(p / (alpha - 1 / 3), 1 / 3)
         return sqrt_alpha * (powza - 1)
@@ -53,12 +56,14 @@ class DirRSVI(nn.Module):
         return torch.prod(u_pow, axis=0) * self.gamma_h(epsilon, alpha + B)
 
     def gamma_h(self, eps, alpha):
+        """\n        Function `gamma_h`.\n    \n        Args:\n        eps: Description.\n        alpha: Description.\n    \n        Returns: Description.\n"""
         b = alpha - 1 / 3
         c = 1 / torch.sqrt(9 * b)
         v = 1 + (eps * c)
         return b * (v**3)
 
     def rsvi(self, alpha):
+        """\n        Function `rsvi`.\n    \n        Args:\n        alpha: Description.\n    \n        Returns: Description.\n"""
         B = 10
         gam = torch.distributions.Gamma(alpha + B, 1).sample().to(alpha.device)
         eps = self.calc_epsilon(gam, alpha + B).detach().to(alpha.device)

@@ -1,3 +1,5 @@
+"""\nModel definitions and helpers for topic models.\n\nThis module is part of the `tomo` topic modeling library.\n"""
+
 import torch
 import torch.nn as nn
 import torch.nn.functional as F

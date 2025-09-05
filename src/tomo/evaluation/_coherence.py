@@ -1,3 +1,5 @@
+"""\nMetrics for evaluating topic models (coherence, diversity, etc.).\n\nThis module is part of the `tomo` topic modeling library.\n"""
+
 from gensim.models import CoherenceModel
 from gensim.corpora import Dictionary
 

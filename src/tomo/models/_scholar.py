@@ -1,3 +1,5 @@
+"""\nModel definitions and helpers for topic models.\n\nThis module is part of the `tomo` topic modeling library.\n"""
+
 import torch
 from torch.distributions import Dirichlet
 from ._base_model import BaseModel
@@ -5,6 +7,8 @@ from .vae_helper._decoder import Decoder, SharedETMDecoder
 
 
 class SCHOLAR(BaseModel):
+    """\n    Class `SCHOLAR`.\n\n    Args:\n    BaseModel: Description.\n\n    Returns: Description.\n"""
+
     def __init__(self, encoder, sampler, decoder, nll_loss, kld_loss, **kwargs) -> None:
         super().__init__()
         self.encoder = encoder
@@ -78,6 +82,7 @@ class SCHOLAR(BaseModel):
         return x, dist_params, z, x_hat, kl_d, nll_loss
 
     def files_to_save(self):
+        """\n        Function `files_to_save`.\n    \n        Returns: Description.\n"""
         file_dict = {}
         json_dict = {}
         topics = self.decoder.get_topics()

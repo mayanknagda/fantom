@@ -1,9 +1,13 @@
+"""\nModel definitions and helpers for topic models.\n\nThis module is part of the `tomo` topic modeling library.\n"""
+
 from bertopic import BERTopic
 from sklearn.feature_extraction.text import CountVectorizer
 from sentence_transformers import SentenceTransformer
 
 
 class BTopic:
+    """\n    Class `BTopic`.\n\n    Returns: Description.\n"""
+
     def __init__(self, train_texts, **kwargs) -> None:
         super().__init__()
         self.kwargs = kwargs
@@ -19,9 +23,11 @@ class BTopic:
         self.train_texts = train_texts
 
     def run(self):
+        """\n        Function `run`.\n    \n        Returns: Description.\n"""
         self.model.fit_transform(self.train_texts)
 
     def files_to_save(self):
+        """\n        Function `files_to_save`.\n    \n        Returns: Description.\n"""
         topics = self.model.get_topics()
         topics_words = []
         for _, values in topics.items():

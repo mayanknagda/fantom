@@ -1,3 +1,5 @@
+"""\nOptimization helpers (training loops, loss functions).\n\nThis module is part of the `tomo` topic modeling library.\n"""
+
 import os
 import torch
 import torch.nn as nn
@@ -28,20 +30,25 @@ class Trainer(ABC):
         self.best_val_loss = float("inf")
 
     def _save_model(self, **kwargs):
+        """\n        Function `_save_model`.\n    \n        Returns: Description.\n"""
         torch.save(self.model.state_dict(), os.path.join(self.exp_path, "model.pt"))
 
     @abstractmethod
     def _train_one_epoch(self, **kwargs):
+        """\n        Function `_train_one_epoch`.\n    \n        Returns: Description.\n"""
         pass
 
     @abstractmethod
     def _val_one_epoch(self, **kwargs):
+        """\n        Function `_val_one_epoch`.\n    \n        Returns: Description.\n"""
         pass
 
     def _run_epoch(self, **kwargs):
+        """\n        Function `_run_epoch`.\n    \n        Returns: Description.\n"""
         self._train_one_epoch()
         self._val_one_epoch()
 
     @abstractmethod
     def run(self, **kwargs):
+        """\n        Function `run`.\n    \n        Returns: Description.\n"""
         pass

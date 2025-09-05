@@ -1,3 +1,5 @@
+"""\nModule description.\n\nThis module is part of the `tomo` topic modeling library.\n"""
+
 import os
 import torch
 import pickle
@@ -11,6 +13,7 @@ from .evaluation import return_coherence, return_topic_diversity
 
 
 def run(**kwargs):
+    """\n    Function `run`.\n\n    Returns: Description.\n"""
     # wandb init
     if kwargs["wandb"] is False:
         os.environ["WANDB_MODE"] = "offline"

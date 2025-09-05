@@ -1,8 +1,16 @@
+"""Data loading and preprocessing utilities."""
+
 import numpy as np
 import gensim.downloader as api
 
 
 def return_word_embeddings(vocab):
+    """
+    Args:
+        vocab: list of str
+    Returns:
+        word_embeddings: np.ndarray
+    """
     glove_vectors = api.load("glove-wiki-gigaword-300")
     word_embeddings = np.zeros((len(vocab), 300))
     for i, word in enumerate(vocab):

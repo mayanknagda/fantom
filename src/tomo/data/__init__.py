@@ -1,3 +1,5 @@
+"""\nData loading and preprocessing utilities."""
+
 import os
 import torch
 import pickle
@@ -88,6 +90,14 @@ def return_prepared_data(dataset_name, data_path, remove_labels=False, tpl=1, **
 
 
 def return_dataloaders(model_name, prepared_data, batch_size=32, **kwargs):
+    """
+    Args:
+        model_name: str
+        prepared_data: dict
+        batch_size: int
+    Returns:
+        train_dl, val_dl, test_dl: DataLoader objects
+    """
     train_kwargs = {}
     val_kwargs = {}
     test_kwargs = {}

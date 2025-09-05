@@ -1,3 +1,5 @@
+"""\nOptimization helpers (training loops, loss functions).\n\nThis module is part of the `tomo` topic modeling library.\n"""
+
 import torch
 import torch.nn as nn
 from torch.distributions import kl_divergence

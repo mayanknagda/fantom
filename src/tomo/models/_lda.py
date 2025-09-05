@@ -1,9 +1,13 @@
+"""\nModel definitions and helpers for topic models.\n\nThis module is part of the `tomo` topic modeling library.\n"""
+
 import os
 from gensim.models.ldamodel import LdaModel
 from gensim.corpora.dictionary import Dictionary
 
 
 class LDA:
+    """\n    Class `LDA`.\n\n    Returns: Description.\n"""
+
     def __init__(self, train_texts, **kwargs) -> None:
         super().__init__()
         self.kwargs = kwargs
@@ -20,6 +24,7 @@ class LDA:
         self.corpus = [self.dictionary.doc2bow(text) for text in new_text]
 
     def run(self):
+        """\n        Function `run`.\n    \n        Returns: Description.\n"""
         self.model = LdaModel(
             self.corpus,
             num_topics=self.kwargs["num_topics"],
@@ -28,6 +33,7 @@ class LDA:
         )
 
     def files_to_save(self):
+        """\n        Function `files_to_save`.\n    \n        Returns: Description.\n"""
         self.model.save(os.path.join(self.kwargs["exp_path"], "lda.model"))
         file_dict = {}
         json_dict = {}
